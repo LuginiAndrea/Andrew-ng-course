@@ -11,13 +11,7 @@ def predict_neural_network(thetas, X, at_layer=None):
         first layer, and now the weights for the first node in the first layer are the ones = layer_weights[0], and this
         logic is used for every node in the neural network.
 
-        In this case, from the shape of the theta array we can deduce that the neural network configuration is:
-                            input layer: 400 inputs + bias unit
-                            hidden layer: 25 neurons + bias unit
-                            output layer: 10 neurons
-
-        For performance reason, it's fundamental to vectorize all the calculations, so we calculate the results of
-        each node in a layer at the same time using:
+        We calculate the results of each node in a layer at the same time using:
         layer k: a = sigmoid (X @ theta[k].T)
     """
     at_layer = len(thetas) if at_layer is None else at_layer-1
@@ -55,6 +49,14 @@ def displayData(X):
     plt.imshow(result, cmap='gray', interpolation='nearest')
 
 
+"""
+    In this case, from the shape of the theta array we can deduce that the neural network configuration is:
+    input layer: 400 inputs + bias unit
+    hidden layer: 25 neurons + bias unit
+    output layer: 10 neurons
+"""
+
+
 def __main__():
     X = utility.csv_to_np_arr("features.csv", None, False)
     y = utility.csv_to_np_arr("labels.csv", None, None)
@@ -65,7 +67,7 @@ def __main__():
     plt.show()
     # ---- Print how accurate our model is
     utility.print_accuracy(
-        res=predict_neural_network(thetas, X),
+        res=utility.predict_neural_network(thetas, X),
         y=y.T.flatten()
     )
 

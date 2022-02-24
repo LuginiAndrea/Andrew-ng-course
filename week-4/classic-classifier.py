@@ -58,8 +58,8 @@ def __main__():
     X, y, _ = utility.prepare_data(X, y)
     thetas, costs = utility.oneVsAll(n_labels=10, reg_lambda=0.1)(X, y, 0.2, 400)
     thetas = thetas.squeeze(axis=2)  # Bring it from 3 dimensions to 2
+    # ---- Print accuracy ----
     predictions = utility.classifier_oneVsAll_predict(thetas, X)
-    print(predictions.shape)
     utility.print_accuracy(predictions, y)
 
 
